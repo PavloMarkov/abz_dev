@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Position } from '../../types/Position';
 import { Button } from '../Button/Button';
+import { FileInputForm } from '../FileInputForm/FileInputForm';
 import { InputForm } from '../InputForm/InputForm';
 import { RadioInputForm } from '../RadioInputForm/RadioInputForm';
 import './RegisterForm.scss';
@@ -38,7 +39,7 @@ export const RegisterForm: React.FC = () => {
         </div>
 
         <div className="register__position-list">
-          {positions.map(position => (
+          {positions.length > 0 && positions.map((position: Position) => (
             <RadioInputForm
               key={position.id}
               position={position}
@@ -48,7 +49,16 @@ export const RegisterForm: React.FC = () => {
           ))}
         </div>
         <div className="register__upload">
-          <input type="file" />
+          {/* <label htmlFor="file" className="file">
+            <input
+              type="file"
+              id="file"
+              accept=".jpg, .jpeg"
+              className="file__input"
+            />
+            Upload your photo
+          </label> */}
+          <FileInputForm />
         </div>
         <div className="register__signup">
           <Button name="Sign up" disabled={positions.length > positionID} />
