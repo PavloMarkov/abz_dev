@@ -1,0 +1,50 @@
+.register {
+  padding: 140px 0 100px;
+
+  &__title {
+    margin: 0 0 50px;
+    padding: 0 16px;
+    font-size: 40px;
+    line-height: 40px;
+    text-align: center;
+  }
+
+  &__data {
+    width: 380px;
+    margin: 0 auto;
+
+    @media (max-width: 415px) {
+      width: 328px;
+    }
+  }
+
+  &__forms {
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+
+  &__position-title {
+    margin-bottom: 11px;
+  }
+
+  &__position-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 47px;
+  }
+
+  &__upload {
+    margin-bottom: 50px;
+  }
+
+  &__signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
