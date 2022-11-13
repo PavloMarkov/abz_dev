@@ -26,7 +26,7 @@ export const App: React.FC = () => {
           <Main />
           {isSignUp && (
             <>
-              <Cards />
+              <Cards isRegister={isRegister} />
               <RegisterForm isRegister={isRegister} registerHandle={registerHandle} />
             </>
           )}
