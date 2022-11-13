@@ -1,5 +1,6 @@
 import React from 'react';
 import './Button.scss';
+import classNames from 'classnames';
 
 type Props = {
   name: string;
@@ -19,7 +20,8 @@ export const Button: React.FC<Props> = ({
   return (
     <button
       type="button"
-      className={disabled ? 'button disabled' : 'button active'}
+      // className={disabled ? 'button disabled' : 'button active'}
+      className={classNames('button', disabled ? 'disabled' : 'active')}
       style={buttonWidth}
       onClick={onClick}
       disabled={disabled}

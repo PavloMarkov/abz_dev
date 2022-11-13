@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import { Position } from '../../types/Position';
 import { Button } from '../Button/Button';
@@ -9,6 +10,7 @@ import './RegisterForm.scss';
 export const RegisterForm: React.FC = () => {
   const [positions, setPositions] = useState<[] | Position[]>([]);
   const [positionID, setPositionID] = useState(0);
+  const [foto, setFoto] = useState<null | any>(null);
 
   useEffect(() => {
     fetch('https://frontend-test-assignment-api.abz.agency/api/v1/positions')
@@ -22,6 +24,12 @@ export const RegisterForm: React.FC = () => {
   const changePositionID = (id: number) => {
     setPositionID(id);
   };
+
+  const handleFoto = (obj: any) => {
+    setFoto(obj);
+  };
+
+  const cantSignUp = (foto === null) || (positionID === 0);
 
   return (
     <section className="register">
@@ -58,10 +66,10 @@ export const RegisterForm: React.FC = () => {
             />
             Upload your photo
           </label> */}
-          <FileInputForm />
+          <FileInputForm onClick={handleFoto} />
         </div>
         <div className="register__signup">
-          <Button name="Sign up" disabled={positions.length > positionID} />
+          <Button name="Sign up" disabled={cantSignUp} />
         </div>
       </div>
     </section>
