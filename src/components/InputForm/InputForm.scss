@@ -1,6 +1,22 @@
 .input {
   box-sizing: border-box;
   width: 100%;
+  position: relative;
+
+  & input:valid ~ span,
+  & input:focus ~ span {
+    color: #7E7E7E;
+    padding: 0 4px;
+    font-size: 12px;
+    line-height: 14px;
+    transform: translateY(-20px);
+    background-color: #E5E5E5;
+  }
+
+  & input:valid ~ .input__label--error,
+  & input:focus ~ .input__label--error {
+    color: #CB3D40;
+  }
 
   &__field {
     box-sizing: border-box;
@@ -11,7 +27,7 @@
     height: 54px;
     border: 1px solid #D0CFCF;
     border-radius: 4px;
-    background: #F8F8F8;
+    background: #E5E5E5;
     outline: none;
   
     font-family: 'Nunito';
@@ -20,6 +36,25 @@
     font-size: 16px;
     line-height: 26px;
     color: rgba(0, 0, 0, 0.87);
+
+    &--error {
+      border: 2px solid #CB3D40;
+    }
+  }
+
+  &__label {
+    position: absolute;
+    top: 14px;
+    left: 12px;
+    pointer-events: none;
+    color: #7E7E7E;
+    font-size: 16px;
+    line-height: 26px;
+    transition: transform 0.1s linear;
+
+    &--error {
+      color: #CB3D40;
+    }
   }
 
   &__helper {
@@ -27,6 +62,10 @@
     line-height: 14px;
     color: #7E7E7E;
     padding-left: 16px;
+
+    &--error {
+      color: #CB3D40;
+    }
   }
 }
 

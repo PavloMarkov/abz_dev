@@ -11,13 +11,15 @@ export const RegisterForm: React.FC = () => {
   const [positions, setPositions] = useState<[] | Position[]>([]);
   const [positionID, setPositionID] = useState(0);
   const [foto, setFoto] = useState<null | any>(null);
+  const [userName, setUserName] = useState('');
+  const [userMail, setUserMail] = useState('');
+  const [userPhone, setUserPhone] = useState('');
 
   useEffect(() => {
     fetch('https://frontend-test-assignment-api.abz.agency/api/v1/positions')
       .then(res => res.json())
       .then(resp => {
         setPositions(resp.positions);
-        setPositionID(resp.positions[0].id);
       });
   }, []);
 
@@ -29,6 +31,10 @@ export const RegisterForm: React.FC = () => {
     setFoto(obj);
   };
 
+  const handleUserName = (str: string) => setUserName(str);
+  const handleUserMail = (str: string) => setUserMail(str);
+  const handleUserPhone = (str: string) => setUserPhone(str);
+
   const cantSignUp = (foto === null) || (positionID === 0);
 
   return (
@@ -37,9 +43,21 @@ export const RegisterForm: React.FC = () => {
 
       <div className="register__data">
         <div className="register__forms">
-          <InputForm />
-          <InputForm />
-          <InputForm />
+          <InputForm
+            label="Your name"
+            value={userName}
+            handleChange={handleUserName}
+          />
+          <InputForm
+            label="Email"
+            value={userMail}
+            handleChange={handleUserMail}
+          />
+          <InputForm
+            label="Phone"
+            value={userPhone}
+            handleChange={handleUserPhone}
+          />
         </div>
 
         <div className="register__position-title">
@@ -57,15 +75,6 @@ export const RegisterForm: React.FC = () => {
           ))}
         </div>
         <div className="register__upload">
-          {/* <label htmlFor="file" className="file">
-            <input
-              type="file"
-              id="file"
-              accept=".jpg, .jpeg"
-              className="file__input"
-            />
-            Upload your photo
-          </label> */}
           <FileInputForm onClick={handleFoto} />
         </div>
         <div className="register__signup">
