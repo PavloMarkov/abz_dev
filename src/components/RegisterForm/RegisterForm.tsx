@@ -24,6 +24,9 @@ export const RegisterForm: React.FC<Props> = ({ isRegister, registerHandle }) =>
   const [userMail, setUserMail] = useState('');
   const [userPhone, setUserPhone] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccessPositions, setIsSuccessPositions] = useState(false);
+  const [isSuccessRegister, setIsSuccessRegister] = useState(false);
+  const [msgRegister, setMsgRegister] = useState('');
 
   const formData = new FormData();
 
@@ -39,7 +42,9 @@ export const RegisterForm: React.FC<Props> = ({ isRegister, registerHandle }) =>
       .then(res => res.json())
       .then(resp => {
         setPositions(resp.positions);
+        setIsSuccessPositions(resp.success);
       })
+      .catch(() => setIsSuccessPositions(false))
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -79,10 +84,12 @@ export const RegisterForm: React.FC<Props> = ({ isRegister, registerHandle }) =>
     )
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        setIsSuccessRegister(data.success);
+        setMsgRegister(data.message);
       })
-      .catch(error => {
-        console.log(error);
+      .catch((err) => {
+        setIsSuccessRegister(false);
+        setMsgRegister(err.message);
       })
       .finally(() => registerHandle());
   };
@@ -94,10 +101,13 @@ export const RegisterForm: React.FC<Props> = ({ isRegister, registerHandle }) =>
         : (
           <section className="register">
             <h1 className="register__title">
-              {isRegister ? 'Working with POST request' : 'User successfully registered'}
+              {isRegister && msgRegister === '' && 'Working with POST request'}
+              {!isSuccessRegister
+                ? msgRegister
+                : 'User successfully registered'}
             </h1>
 
-            {isRegister
+            {!isSuccessRegister
               ? (
                 <div className="register__data">
                   <div className="register__forms">
@@ -125,14 +135,19 @@ export const RegisterForm: React.FC<Props> = ({ isRegister, registerHandle }) =>
                   <div className="register__position-list">
                     {isLoading
                       ? <Preloader />
-                      : (positions.length > 0 && positions.map((position: Position) => (
-                        <RadioInputForm
-                          key={position.id}
-                          position={position}
-                          changePositionID={changePositionID}
-                          checked={positionID === position.id}
-                        />
-                      )))}
+                      : (isSuccessPositions && positions.length > 0 && positions.map(
+                        (position: Position) => (
+                          <RadioInputForm
+                            key={position.id}
+                            position={position}
+                            changePositionID={changePositionID}
+                            checked={positionID === position.id}
+                          />
+                        ),
+                      ))}
+                    {!isSuccessPositions && (
+                      <div>Troubles with professions loading</div>
+                    )}
                   </div>
                   <div className="register__upload">
                     <FileInputForm onClick={handleFoto} />
@@ -141,11 +156,11 @@ export const RegisterForm: React.FC<Props> = ({ isRegister, registerHandle }) =>
                     <Button name="Sign up" disabled={cantSignUp} onClick={handleSignUp} />
                   </div>
                 </div>
-              ) : (
+              ) : (isSuccessRegister && (
                 <div className="register__success">
                   <img src={successImage} alt="successfull registration" />
                 </div>
-              )}
+              ))}
           </section>
         )}
     </>
