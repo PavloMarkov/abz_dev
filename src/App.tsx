@@ -23,7 +23,7 @@ export const App: React.FC = () => {
       </div>
       <div className="page__main">
         <div className="container">
-          <Main />
+          <Main click={clickHandle} />
           {isSignUp && (
             <>
               <Cards isRegister={isRegister} />
