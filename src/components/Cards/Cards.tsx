@@ -23,9 +23,11 @@ export const Cards: React.FC = () => {
       });
   }, [page]);
 
-  const usersToShow = [...users].sort(
-    (first, second) => second.registration_timestamp - first.registration_timestamp,
-  );
+  const usersToShow = [...users]
+    .sort(
+      (first, second) => second.registration_timestamp - first.registration_timestamp,
+    )
+    .slice(0, 6);
 
   return (
     <section className="cards">

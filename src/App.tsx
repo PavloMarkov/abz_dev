@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Header } from './components/Header/Header';
 import './App.scss';
 import { Main } from './components/Main/Main';
@@ -6,35 +6,30 @@ import { Cards } from './components/Cards/Cards';
 import { RegisterForm } from './components/RegisterForm/RegisterForm';
 
 export const App: React.FC = () => {
-  // const [type, setType] = useState('mobile');
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [isRegister, setIsRegister] = useState(true);
 
-  // useEffect(() => {
-  //   const deviceWidth = window.innerWidth;
-
-  //   if (deviceWidth >= 1170) {
-  //     setType('TV');
-  //   } else if (deviceWidth >= 1024) {
-  //     setType('desktop');
-  //   } else if (deviceWidth >= 768) {
-  //     setType('tablet');
-  //   } else {
-  //     setType('mobile');
-  //   }
-  // },
-  // []);
+  const clickHandle = () => setIsSignUp(!isSignUp);
+  const registerHandle = () => setIsRegister(false);
 
   return (
     <div className="page">
       <div className="page__header">
         <div className="container">
-          <Header />
+          <Header
+            click={clickHandle}
+          />
         </div>
       </div>
       <div className="page__main">
         <div className="container">
           <Main />
-          <Cards />
-          <RegisterForm />
+          {isSignUp && (
+            <>
+              <Cards />
+              <RegisterForm isRegister={isRegister} registerHandle={registerHandle} />
+            </>
+          )}
         </div>
       </div>
     </div>
