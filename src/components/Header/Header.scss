@@ -1,5 +1,4 @@
 .header {
-
   box-sizing: border-box;
   height: 60px;
   padding: 13px 0;
@@ -8,21 +7,17 @@
   align-items: center;
   background-color: #fff;
 
-  //desktop
   @media (max-width: 1169px) {
     padding: 13px 60px;
   }
 
-  //tablet
   @media (max-width: 1023px) {
     padding: 13px 32px;
   }
 
-   //mobile
    @media (max-width: 767px) {
     padding: 13px 16px;
   }
-
 
   &__actions {
     display: flex;

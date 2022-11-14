@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import { Position } from '../../types/Position';
@@ -59,14 +58,8 @@ export const RegisterForm: React.FC<Props> = ({ isRegister, registerHandle }) =>
       .finally(() => setIsLoading(false));
   }, []);
 
-  const changePositionID = (id: number) => {
-    setPositionID(id);
-  };
-
-  const handleFoto = (obj: any) => {
-    setFoto(obj);
-  };
-
+  const changePositionID = (id: number) => setPositionID(id);
+  const handleFoto = (obj: any) => setFoto(obj);
   const handleUserName = (str: string) => setUserName(str);
   const handleUserMail = (str: string) => setUserMail(str);
   const handleUserPhone = (str: string) => setUserPhone(str);
@@ -102,6 +95,7 @@ export const RegisterForm: React.FC<Props> = ({ isRegister, registerHandle }) =>
           <section className="register">
             <h1 className="register__title">
               {isRegister && msgRegister === '' && 'Working with POST request'}
+
               {!isSuccessRegister
                 ? msgRegister
                 : 'User successfully registered'}
@@ -116,11 +110,13 @@ export const RegisterForm: React.FC<Props> = ({ isRegister, registerHandle }) =>
                       value={userName}
                       handleChange={handleUserName}
                     />
+
                     <InputForm
                       label="Email"
                       value={userMail}
                       handleChange={handleUserMail}
                     />
+
                     <InputForm
                       label="Phone"
                       value={userPhone}
@@ -145,20 +141,33 @@ export const RegisterForm: React.FC<Props> = ({ isRegister, registerHandle }) =>
                           />
                         ),
                       ))}
+
                     {!isSuccessPositions && (
-                      <div>Troubles with professions loading</div>
+                      <div className="register__position-title">Troubles with positions loading</div>
                     )}
                   </div>
+
                   <div className="register__upload">
-                    <FileInputForm onClick={handleFoto} />
+                    <FileInputForm
+                      addFile={handleFoto}
+                      foto={foto}
+                    />
                   </div>
+
                   <div className="register__signup">
-                    <Button name="Sign up" disabled={!cantSignUp} onClick={handleSignUp} />
+                    <Button
+                      name="Sign up"
+                      disabled={!cantSignUp}
+                      onClick={handleSignUp}
+                    />
                   </div>
                 </div>
               ) : (isSuccessRegister && (
                 <div className="register__success">
-                  <img src={successImage} alt="successfull registration" />
+                  <img
+                    src={successImage}
+                    alt="successfull registration"
+                  />
                 </div>
               ))}
           </section>

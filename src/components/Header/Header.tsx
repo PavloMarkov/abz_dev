@@ -13,9 +13,17 @@ export const Header: React.FC<Props> = ({ click }) => {
       <div>
         <Logo />
       </div>
+
       <div className="header__actions">
-        <Button name="Users" />
-        <Button name="Sign up" onClick={click} />
+        <Button
+          name="Users"
+          onClick={click}
+        />
+
+        <Button
+          name="Sign up"
+          onClick={click}
+        />
       </div>
     </header>
   );

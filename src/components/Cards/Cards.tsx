@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { User } from '../../types/User';
 import { Button } from '../Button/Button';
@@ -51,6 +50,7 @@ export const Cards: React.FC<Props> = ({ isRegister }) => {
               user={user}
             />
           )))}
+        {usersToShow.length === 0 && (<div className="cards__title">No users to show</div>)}
       </div>
       {(totalPages > page) && (
         <Button

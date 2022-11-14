@@ -21,13 +21,23 @@ export const App: React.FC = () => {
           />
         </div>
       </div>
+
       <div className="page__main">
         <div className="container">
-          <Main click={clickHandle} />
+          <Main
+            click={clickHandle}
+          />
+
           {isSignUp && (
             <>
-              <Cards isRegister={isRegister} />
-              <RegisterForm isRegister={isRegister} registerHandle={registerHandle} />
+              <Cards
+                isRegister={isRegister}
+              />
+
+              <RegisterForm
+                isRegister={isRegister}
+                registerHandle={registerHandle}
+              />
             </>
           )}
         </div>

@@ -59,22 +59,26 @@ export const InputForm: React.FC<Props> = ({ label, value, handleChange }) => {
           onChange={(e) => handleChange(e.target.value)}
           onBlur={() => (setWasOnField(true))}
         />
+
         <span
           className={classnames('input__label', { 'input__label--error': wasOnField && !handleError() })}
         >
           {label}
         </span>
       </div>
+
       {label === 'Phone' && (
         <div className={classnames('input__helper', { 'input__helper--error': wasOnField && !handleError() })}>
           +38 (XXX) XXX - XX - XX
         </div>
       )}
+
       {label === 'Your name' && wasOnField && !handleError() && (
         <div className="input__helper input__helper--error">
           The name must be at least 2 characters and max 60 characters
         </div>
       )}
+
       {label === 'Email' && wasOnField && !handleError() && (
         <div className="input__helper input__helper--error">
           The email must be a valid email address.
