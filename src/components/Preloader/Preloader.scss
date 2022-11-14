@@ -1,0 +1,24 @@
+.preloader {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+
+  &__img{
+    width: 48px;
+    height: 48px;
+    display: block;
+    animation: rotateImg 2s linear infinite;
+  }
+}
+
+@keyframes rotateImg {
+  0% {
+    transform: rotate(0); 
+  }
+  100% {
+    transform: rotate(360deg); 
+  }
+}

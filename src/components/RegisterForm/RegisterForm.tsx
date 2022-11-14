@@ -53,8 +53,8 @@ export const RegisterForm: React.FC<Props> = ({ isRegister, registerHandle }) =>
     fetch('https://frontend-test-assignment-api.abz.agency/api/v1/token')
       .then(res => res.json())
       .then(resp => {
-        setTokenKey(resp.token);
         localStorage.setItem('token', resp.token);
+        setTokenKey(resp.token);
       })
       .finally(() => setIsLoading(false));
   }, []);
@@ -71,7 +71,7 @@ export const RegisterForm: React.FC<Props> = ({ isRegister, registerHandle }) =>
   const handleUserMail = (str: string) => setUserMail(str);
   const handleUserPhone = (str: string) => setUserPhone(str);
 
-  const cantSignUp = (foto === null) || (positionID === 0);
+  const cantSignUp = [foto, positionID, userName, userMail, userPhone].every(Boolean);
 
   const handleSignUp = () => {
     fetch(
@@ -153,7 +153,7 @@ export const RegisterForm: React.FC<Props> = ({ isRegister, registerHandle }) =>
                     <FileInputForm onClick={handleFoto} />
                   </div>
                   <div className="register__signup">
-                    <Button name="Sign up" disabled={cantSignUp} onClick={handleSignUp} />
+                    <Button name="Sign up" disabled={!cantSignUp} onClick={handleSignUp} />
                   </div>
                 </div>
               ) : (isSuccessRegister && (
