@@ -41,14 +41,13 @@ export const Cards: React.FC<Props> = ({ isRegister }) => {
         Working with GET request
       </h1>
       <div className="cards__list">
-        {isLoading
-          ? <Preloader />
-          : (usersToShow.map(user => (
-            <Card
-              key={user.id}
-              user={user}
-            />
-          )))}
+        {usersToShow.map(user => (
+          <Card
+            key={user.id}
+            user={user}
+          />
+        ))}
+        {isLoading && <Preloader />}
         {usersToShow.length === 0 && (<div className="cards__title">No users to show</div>)}
       </div>
       {(totalPages > page) && (
