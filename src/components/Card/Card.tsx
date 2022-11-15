@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import './Card.scss';
 import { User } from '../../types/User';
 import defaultImg from './Vector.svg';
@@ -36,7 +37,7 @@ export const Card: React.FC<Props> = ({ user }) => {
         onError={imageOnErrorHandler}
       />
       <div
-        className="card__name"
+        className={classnames('card__name', { 'card__name--tooltip': user.name.length > 30 })}
         data-tooltip={user.name}
       >
         {trimInfo(user.name)}
@@ -44,7 +45,7 @@ export const Card: React.FC<Props> = ({ user }) => {
       <div className="card__info">
         <div className="card__job">{user.position}</div>
         <div
-          className="card__mail"
+          className={classnames('card__mail', { 'card__mail--tooltip': user.name.length > 30 })}
           data-tooltip={user.email}
         >
           <a href={`mailto:${user.email}`} className="card__mail-link">

@@ -38,33 +38,30 @@
   &__mail {
     position: relative;
     cursor: pointer;
+
+    &--tooltip::after {
+      position: absolute;
+      padding: 3px 16px;
+      border-radius: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -35px;
+      width: max-content;
+      background-color: rgba(0, 0, 0, 0.87);
+      color: #fff;
+      content: attr(data-tooltip);
+      opacity: 0;
+      z-index: -1;
+    }
+
+    &--tooltip:hover::after {
+      content: attr(data-tooltip);
+      opacity: 1;
+      z-index: 1;
+    }
   }
 
   &__phone {
     cursor: pointer;
   }
-
-  &__name::after,
-  &__mail::after {
-    position: absolute;
-    padding: 3px 16px;
-    border-radius: 4px;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -35px;
-    width: max-content;
-    background-color: rgba(0, 0, 0, 0.87);
-    color: #fff;
-    content: attr(data-tooltip);
-    opacity: 0;
-    z-index: -1;
-  }
-
-  &__name:hover::after,
-  &__mail:hover::after {
-    content: attr(data-tooltip);
-    opacity: 1;
-    z-index: 1;
-  }
-  
 }
